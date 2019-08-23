@@ -42,13 +42,15 @@ const appTokenFromRequest = fromAuthHeaderAsBearerToken();
 // app token to validate the request is coming from the authenticated server only.
 const appTokenDB = {
   sso_consumer: "l1Q7zkOL59cRqWBkQ12ZiGVW2DBL",
-  simple_sso_consumer: "1g0jJwGmRQhJwvwNOrY4i90kD0m"
+  simple_sso_consumer: "1g0jJwGmRQhJwvwNOrY4i90kD0m",
+  tars: "l1Q7zkOL59cRqWBkQ12ZiGVW2DBL",
 };
 
 const alloweOrigin = {
   "http://consumer.ankuranand.in:3020": true,
   "http://consumertwo.ankuranand.in:3030": true,
-  "http://sso.ankuranand.in:3080": false
+  "http://sso.ankuranand.in:3080": false,
+  "http://127.0.0.1:3000": true,
 };
 
 const deHyphenatedUUID = () => uuidv4().replace(/-/gi, "");
@@ -61,7 +63,8 @@ const sessionApp = {};
 
 const originAppName = {
   "http://consumer.ankuranand.in:3020": "sso_consumer",
-  "http://consumertwo.ankuranand.in:3030": "simple_sso_consumer"
+  "http://consumertwo.ankuranand.in:3030": "simple_sso_consumer",
+  "http://127.0.0.1:3000": "tars",
 };
 
 const userDB = {
@@ -70,6 +73,7 @@ const userDB = {
     userId: encodedId(), // incase you dont want to share the user-email.
     appPolicy: {
       sso_consumer: { role: "admin", shareEmail: true },
+      tars: { role: "admin", shareEmail: true },
       simple_sso_consumer: { role: "user", shareEmail: false }
     }
   }
